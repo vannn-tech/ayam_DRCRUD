@@ -102,5 +102,13 @@ namespace CRUDMahasiswaADO
             loadDataChart();
         }
 
+        // 12. b. Button Reset Click
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            button = 0;
+            loadDataChart();
+        }
+
+        
     }
 }
