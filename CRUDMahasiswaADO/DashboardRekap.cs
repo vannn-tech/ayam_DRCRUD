@@ -109,6 +109,13 @@ namespace CRUDMahasiswaADO
             loadDataChart();
         }
 
-        
+        // 12. c. Button Data Mahasiswa Click
+        private void btnDataMahasiswa_Click(object sender, EventArgs e)
+        {
+            DataMahasiswa frm1 = new DataMahasiswa();
+            frm1.Show();
+            this.Hide();
+        }
+
     }
 }
