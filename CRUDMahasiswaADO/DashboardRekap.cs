@@ -117,5 +117,70 @@ namespace CRUDMahasiswaADO
             this.Hide();
         }
 
+        // === FIX UTAMA ===
+        // Event ini harus terhubung ke chart1.SelectedIndexChanged (combo Kolom/Pie).
+        // Cek di Designer.cs, baris yang mirip:
+        //   this.chart1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+        // Method ini harus diisi logikanya (bukan dibiarkan kosong),
+        // supaya saat dropdown tipe chart diganti, grafik langsung reload.
+
+        // Jaga-jaga kalau ternyata yang terhubung ke chart1 adalah comboBox2.
+        // Kalau setelah dicek di Designer ternyata comboBox2 ini TIDAK terhubung
+        // ke kontrol apapun (artifact/sisa generate Designer), boleh dihapus.
+
+        // Method bawaan form yang tidak digunakan, dibiarkan kosong
+        private void label1_Click(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void DashboardRekap_Load(object sender, EventArgs e) 
+        {
+            dtpTanggalMasuk.MinDate = new DateTime(2000, 1, 1);
+            dtpTanggalMasuk.Format = DateTimePickerFormat.Custom;
+            dtpTanggalMasuk.CustomFormat = "yyyy";
+            dtpTanggalMasuk.ShowUpDown = true;
+            dtpTanggalMasuk.MaxDate = DateTime.Now;
+
+            // chart1 = ComboBox (untuk pilih tipe chart: Kolom/Pie)
+            cmbTipe.DropDownStyle = ComboBoxStyle.DropDownList;
+            var items = new List<KeyValuePair<string, SeriesChartType>>()
+            {
+                new KeyValuePair<string, SeriesChartType>("Kolom", SeriesChartType.Column),
+                new KeyValuePair<string, SeriesChartType>("Pie", SeriesChartType.Pie)
+            };
+
+            isInitializing = true;
+
+            cmbTipe.DataSource = items;
+            cmbTipe.DisplayMember = "Key";
+            cmbTipe.ValueMember = "Value";
+            cmbTipe.SelectedIndex = 0;
+
+            isInitializing = false;
+            loadDataChart();
+        }
+
+        private void dtpTanggalMasuk_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chartProdi_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTipe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(isInitializing) 
+                return;
+
+            if (button == 1)
+            {
+                loadDataChart(); // disarankan tetap reload, modul asli kosong di branch ini
+            }
+            else
+            {
+                loadDataChart();
+            }
+        }
     }
 }
