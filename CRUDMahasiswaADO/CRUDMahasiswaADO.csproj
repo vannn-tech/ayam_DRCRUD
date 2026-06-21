@@ -64,9 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL.cs" />
-    <Compile Include="DashboardRekap.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DashboardRekap.cs" />
     <Compile Include="DashboardRekap.Designer.cs">
       <DependentUpon>DashboardRekap.cs</DependentUpon>
     </Compile>
